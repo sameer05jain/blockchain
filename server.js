@@ -8,6 +8,12 @@ hbs.registerPartials(path.join(__dirname, './src/views/partials'));
 app.use(express.static('src'))
 const port = process.env.PORT || 6969;
 
+
+// Setting multiple locals variable
+app.locals.title = 'SmartWealth Solutions';
+app.locals.description = 'Empowering Your Future, One Investment at a Time';
+app.locals.email = 'contact@SmartWealthSolutions.com';
+
 app.use(session({
 	secret: 'marthandam damdererere',
 	resave: true,

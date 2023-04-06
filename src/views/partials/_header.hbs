@@ -1,19 +1,20 @@
   <header>
-    <h1>SmartWealth Solutions</h1>
+    <img src="images/logo.png" alt="logo">
+    <h1>{{title}}</h1>
   </header>
   <nav>
-    <a href="/">Home |</a>
-    <a href="#services">Services</a> |
-    <a href="#location">location</a> |
-    <a href="#contact">Contact</a> |
-    <a href="#about">About</a> |
+    <a href="/">Home</a>
+    <a href="#services">Services</a> 
+    <a href="#location">location</a> 
+    <a href="#contact">Contact</a> 
+    <a href="#about">About</a> 
     <a href="/login">Login</a>
   </nav>
-  <!-- TradingView Widget BEGIN -->
+<!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Markets today</span></a> by TradingView</div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
   {
   "symbols": [
     {
@@ -37,9 +38,10 @@
       "title": "Ethereum"
     }
   ],
+  "showSymbolLogo": true,
   "colorTheme": "light",
   "isTransparent": false,
-  "showSymbolLogo": true,
+  "displayMode": "adaptive",
   "locale": "en"
 }
   </script>
