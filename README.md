@@ -33,6 +33,8 @@ Branch v2 contains the cleanup i am doing at the moment
 To check the changes :
   git pull
     
+  npm install 
+  
   git checkout v2
     
   run the project 
