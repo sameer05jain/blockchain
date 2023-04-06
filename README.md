@@ -20,13 +20,14 @@ We will merge individual branchs after revewing
   
 Notes
 ------
-Branch v2 contains the cleanup i am doing at the moment
-To check the changes :
+- Branch v2 contains the cleanup i am doing at the moment
+- To check the changes :
   git pull
   git checkout v2
   run the project 
   
-Use nodemon for hot reload (running the server without restarting after each change)
+- Use nodemon for hot reload (running the server without restarting after each change)
   
  npm install nodemon -g
+
  nodemon server.js
