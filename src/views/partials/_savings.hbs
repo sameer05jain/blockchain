@@ -1,0 +1,38 @@
+<section id="savings">
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Decentralized Savings</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Deposit</h5>
+            <form id="deposit-form">
+                <div class="mb-3">
+                    <label for="deposit-amount" class="form-label">Amount (ETH)</label>
+                    <input type="number" min="0" step="any" class="form-control" id="deposit-amount" placeholder="Enter deposit amount">
+                </div>
+                <button type="submit" class="btn btn-primary">Deposit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Withdraw</h5>
+            <form id="withdraw-form">
+                <div class="mb-3">
+                    <label for="withdraw-amount" class="form-label">Amount (ETH)</label>
+                    <input type="number" min="0" step="any" class="form-control" id="withdraw-amount" placeholder="Enter withdrawal amount">
+                </div>
+                <button type="submit" class="btn btn-primary">Withdraw</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Account Details</h5>
+            <p>Balance: <span id="balance">0</span> ETH</p>
+            <p>Interest: <span id="interest">0</span> ETH</p>
+        </div>
+    </div>
+</div>
+</section>
