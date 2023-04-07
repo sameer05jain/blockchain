@@ -51,19 +51,19 @@ async function loadContractConfig() {
                 updateAccountDetails();
             });
 
-            document.getElementById('withdraw-form').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const weiAmount = document.getElementById('withdraw-amount').value;
-                await contract.methods.withdraw(weiAmount).send({ from: userAccount });
-                updateAccountDetails(userAccount, contract);
-            });
+            // document.getElementById('withdraw-form').addEventListener('submit', async (e) => {
+            //     e.preventDefault();
+            //     const weiAmount = document.getElementById('withdraw-amount').value;
+            //     await contract.methods.withdraw(weiAmount).send({ from: userAccount });
+            //     updateAccountDetails(userAccount, contract);
+            // });
 
             document.getElementById('withdraw-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const weiAmount = document.getElementById('withdraw-amount').value;
             
                 await contract.methods.withdraw(userAccount, weiAmount).send({ from: userAccount });
-                updateAccountDetails(userAccount, contract);
+                updateAccountDetails();
             });
 
             updateAccountDetails();
