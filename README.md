@@ -45,3 +45,11 @@ Use nodemon for hot reload (running the server without restarting after each cha
  npm install nodemon -g
 
  nodemon server.js
+ 
+ Deploy
+ ------
+ https://smart-health.herokuapp.com/
+ 1. sign up for heroku 
+ 2. Create an app
+ 3. Deploy directly from git
+ 
