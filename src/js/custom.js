@@ -21,9 +21,15 @@ const loginWithWeb3 = async () => {
         // 4. store the user's wallet address in local storage
         window.localStorage.setItem("userWalletAddress", selectedAccount);
   
+        showUserDashboard();
+
         // 5. Hide the login section
-        document.getElementById("userArea").innerHTML = `User Account: ${selectedAccount}`;
+        document.getElementsByClassName("logout")[0].style.display = "inline"; 
+        document.getElementsByClassName("login")[0].style.display = "none"; 
+        document.getElementsByClassName("dashboard-container")[0].style.display = "block"; 
+
         $(".login-container").fadeOut("slow");
+        $(".dashboard-container").fadeIn("slow");
       } catch (error) {
         alert(error);
       }
@@ -32,6 +38,15 @@ const loginWithWeb3 = async () => {
     }
   };
 
+const setSessionButtons = async () => {
+    if(window.localStorage.getItem("userWalletAddress")) {
+        document.getElementsByClassName("login")[0].style.display = "none"; 
+        document.getElementsByClassName("logout")[0].style.display = "inline"; 
+        document.getElementsByClassName("login-container")[0].style.display = "none"; 
+        document.getElementsByClassName("dashboard-container")[0].style.display = "block"; 
+    } 
+}
+
 // Log out
 const logout = () => {
     // set the global userWalletAddress variable to null
@@ -39,10 +54,51 @@ const logout = () => {
   
     // remove the user's wallet address from local storage
     window.localStorage.removeItem("userWalletAddress");
-  
-    // show the user dashboard
-    showUserDashboard();
+
+    setSessionButtons();
   };
+
+  // function to show the user dashboard
+const showUserDashboard = async () => {
+    let userWalletAddress = window.localStorage.getItem("userWalletAddress");
+    if (!userWalletAddress) {
+      return false;
+    }
+    // show the user's wallet address
+    showUserWalletAddress();  
+    // get the user's wallet balance
+    getWalletBalance();
+  };
+  
+
+  // get the user's wallet balance
+const getWalletBalance = async () => {
+    let userWalletAddress = window.localStorage.getItem("userWalletAddress");
+    // check if there is global userWalletAddress variable
+    if (!userWalletAddress) {
+      return false;
+    }
+  
+    const balance = await window.ethereum
+    .request({
+      method: "eth_getBalance",
+      params: [userWalletAddress, "latest"]
+    })
+    .then((balalnce) => balalnce)
+    .catch(() => {
+      // 2.1 if the user cancels the login prompt
+      throw Error("Please select an account");
+    }); 
+
+    // convert the balance to ether
+    document.querySelector(".wallet-balance").innerHTML = Number(balance / 1e18).toString(10);
+  };
+  
+// show the user's wallet address from the global userWalletAddress variable
+const showUserWalletAddress = () => {
+    const walletAddressEl = document.querySelector(".wallet-address");
+    walletAddressEl.innerHTML = window.localStorage.getItem("userWalletAddress");
+};
 
 const connectContract = async () => {
         const ABI = [
@@ -124,3 +180,7 @@ const withdraw = async () => {
     const address = document.getElementById("addressInput").value;
     await window.contract.methods.withdraw(address, amount).send({from: account});
 }
+
+window.onload = function() {
+    setSessionButtons();
+  };

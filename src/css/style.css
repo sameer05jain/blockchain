@@ -34,6 +34,10 @@ nav a:hover{
   color:  #fff;
   transform: scale(2);
 }
+
+nav .logout{
+  display: none;
+}
 section {
   padding: 50px;
   text-align: center;
@@ -192,5 +196,9 @@ height: 100%;
   }
 
   .tradingview-widget-copyright {
+    display: none;
+  }
+
+  .dashboard-container{
     display: none;
   }
