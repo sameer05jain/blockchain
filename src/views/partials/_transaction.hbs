@@ -1,37 +1,35 @@
-      <section class="transaction">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-      
-              <div id="readArea"> <br><!-- READING FROM CONTRACT -->
-                
-                <button class="btn btn-primary" onclick="connectContract()">CONNECT TO CONTRACT</button>
-                <p id="contractArea">Status: Not connected to Contract</p>
-                <!-- meta to SC -->
-      
-                <button class="btn btn-primary" onclick="getContractAccount()"> GET CONTRACT ACCOUNT </button>
-                <p id="contractAccount">Contract Account: Not Connected to Contract</p>
-                <!-- CAlling the function designed in Transactions.sol get deployment addresss -->
-      
-                <button class="btn btn-success" onclick="getContractBalance()">GET BALANCE OF THE CONTRACT</button>
-                <p id="balanceArea">Balance: Not Connected to Contract</p>
-                <!-- CAlling the function designed in Transactions.sol get balance -->    
-              </div>
-      
-            </div>
-            <div class="col-sm-6">
-              <div id="writeArea"><br><!-- WRITING TO CONTRACT -->
-                <button class="btn btn-anger" onclick="depositContract()">Send ether to the Contract</button><br>
-                <input type="number" id="depositInput" placeholder="Enter Amount"><br> <br>
-                  <!-- Deposit to contract calling on deposit function -->
-        
-                <button onclick="withdraw()">WITHDRAW ETHER TO ANY ADDRESS</button> <br>
-                <input type="text" id="addressInput" placeholder="Enter Address"> <br>
-                <input type="number" id="amountInput" placeholder="Enter Amount"> 
-                        <!-- CAlling the function designed in Transactions.sol -->
-                <!-- calling the withdraw function -->
-              </div>
-            </div>
-          </div>
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
+        <div id="readArea">
+          <br>
+          <button class="btn btn-primary" onclick="connectContract()">CONNECT TO CONTRACT</button>
+          <p id="contractArea">Status: Not connected to Contract</p>
+          
+          <button class="btn btn-primary" onclick="getContractAccount()">GET CONTRACT ACCOUNT</button>
+          <p id="contractAccount">Contract Account: Not Connected to Contract</p>
+          
+          <button class="btn btn-success" onclick="getContractBalance()">GET BALANCE OF THE CONTRACT</button>
+          <p id="balanceArea">Balance: Not Connected to Contract</p>
         </div>
-      </section>
+      </div>
+      
+      <div class="col-sm-6">
+        <div id="writeArea">
+          <br>
+          <button class="btn btn-danger" onclick="depositContract()">Send ether to the Contract</button><br><br>
+          <label for="depositInput">Enter Amount:</label>
+          <input type="number" id="depositInput" placeholder="Enter Amount"><br><br>
+          
+          <label for="addressInput">Enter Address:</label>
+          <input type="text" id="addressInput" placeholder="Enter Address"><br>
+          <label for="amountInput">Enter Amount:</label>
+          <input type="number" id="amountInput" placeholder="Enter Amount"><br><br>
+          
+          <button class="btn btn-primary" onclick="withdraw()">WITHDRAW ETHER TO ANY ADDRESS</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
