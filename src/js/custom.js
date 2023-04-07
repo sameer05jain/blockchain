@@ -111,62 +111,14 @@ const showUserWalletAddress = () => {
 };
 
 const connectContract = async () => {
-        const ABI = [
-            {
-                "inputs": [],
-                "name": "deposit",
-                "outputs": [],
-                "stateMutability": "payable",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "getAddress",
-                "outputs": [
-                    {
-                        "internalType": "address",
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "getBalance",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "address payable",
-                        "name": "_to",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "_amount",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "withdraw",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-            }
-        ]
-    const Address = "0x748109Fd23A8456026E00d4426E462D00BdE008B"; 
+    const response = await fetch('/js/transactionContractConfig.json');
+    console.log(response);
+    const contractConfig = await response.json();
+    const contractAddress = contractConfig.contractAddress;
+    const contractABI = contractConfig.contractABI;
     window.web3 = await new Web3(window.ethereum);
-    window.contract = await new window.web3.eth.Contract(ABI, Address);
+
+    window.contract = await new window.web3.eth.Contract(contractABI, contractAddress);
     document.getElementById("contractArea").innerHTML = "Connected to Contract"; // calling the elementID above
 }
 
@@ -193,16 +145,13 @@ const withdraw = async () => {
     await window.contract.methods.withdraw(address, amount).send({from: userWalletAddress});
 }
 
-function setValue() {
-    document.getElementById("depositInput").value = "500";
-}
-
-function setValue1() {
-    document.getElementById("depositInput").value = "1000";
-}
-
-function setValue2() {
-    document.getElementById("depositInput").value = "1500";
+const setValue  = async (amount) => {
+   let userWalletAddress = window.localStorage.getItem("userWalletAddress");
+   if (!userWalletAddress && window.location.pathname != '/login' ) {
+      window.location.href = "/login";
+   } else {
+    document.getElementById("depositInput").value = amount;
+   }
 }
 
 window.onload = function() {
