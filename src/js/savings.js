@@ -11,11 +11,11 @@ async function updateAccountDetails() {
             const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
         
             const balanceWei = await contract.methods.getBalance(userAccount).call();
-            const balance = web3.utils.fromWei(balanceWei, 'ether');
+            
             const interest = await contract.methods.calculateInterest(userAccount).call();
-            const interestEth = web3.utils.fromWei(interest, 'ether');
-            document.getElementById('balance').textContent = balance;
-            document.getElementById('interest').textContent = interestEth;
+
+            document.getElementById('balance').textContent = balanceWei;
+            document.getElementById('interest').textContent = interest;
         } catch (error) {
             console.error(error);
         }
