@@ -20,8 +20,6 @@ const loginWithWeb3 = async () => {
   
         // 4. store the user's wallet address in local storage
         window.localStorage.setItem("userWalletAddress", selectedAccount);
-  
-        showUserDashboard();
 
         // 5. Hide the login section
         document.getElementsByClassName("logout")[0].style.display = "inline"; 
@@ -30,6 +28,14 @@ const loginWithWeb3 = async () => {
 
         $(".login-container").fadeOut("slow");
         $(".dashboard-container").fadeIn("slow");
+
+        // 6. Show Dashbpoard Display Contract
+
+        showUserDashboard();
+
+        await connectContract();
+        getContractAccount();
+        getContractBalance();
       } catch (error) {
         alert(error);
       }
@@ -44,6 +50,10 @@ const setSessionButtons = async () => {
         document.getElementsByClassName("logout")[0].style.display = "inline"; 
         document.getElementsByClassName("login-container")[0].style.display = "none"; 
         document.getElementsByClassName("dashboard-container")[0].style.display = "block"; 
+        showUserDashboard();
+        await connectContract();
+        getContractAccount();
+        getContractBalance();
     } 
 }
 
@@ -102,59 +112,59 @@ const showUserWalletAddress = () => {
 
 const connectContract = async () => {
         const ABI = [
-    {
-    "inputs": [],
-    "name": "deposit",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-    },
-    {
-    "inputs": [],
-    "name": "getAddress",
-    "outputs": [
-        {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-        }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-    },
-    {
-    "inputs": [],
-    "name": "getBalance",
-    "outputs": [
-        {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-        }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-    },
-    {
-    "inputs": [
-        {
-            "internalType": "address payable",
-            "name": "_to",
-            "type": "address"
-        },
-        {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-        }
-    ],
-    "name": "withdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-    }
-    ];
-    const Address = "0x7BF8E2b093a05DE6D6550bDEB29BC5D0e87c1820"; // Taking Address from Remix 
+            {
+                "inputs": [],
+                "name": "deposit",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getAddress",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getBalance",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address payable",
+                        "name": "_to",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_amount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "withdraw",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
+        ]
+    const Address = "0x748109Fd23A8456026E00d4426E462D00BdE008B"; 
     window.web3 = await new Web3(window.ethereum);
     window.contract = await new window.web3.eth.Contract(ABI, Address);
     document.getElementById("contractArea").innerHTML = "Connected to Contract"; // calling the elementID above
@@ -165,20 +175,34 @@ const getContractAccount = async () => {
     document.getElementById("contractAccount").innerHTML = `Contract Account: ${data}`;
 }
 
-const getBalanceApple = async () => { // const getBalanceApple is the HTML function & .contract.getBalance is the smart contract function
+const getContractBalance = async () => { 
     const data = await window.contract.methods.getBalance().call();
     document.getElementById("balanceArea").innerHTML = `Contract Balance: ${data}`;
 }
 
 const depositContract = async () => {
+    let userWalletAddress = window.localStorage.getItem("userWalletAddress");
     const amount = document.getElementById("depositInput").value;
-    await window.contract.methods.deposit().send({from: account, value: amount});
+    await window.contract.methods.deposit().send({from: userWalletAddress, value: amount});
 }
 
 const withdraw = async () => {
+    let userWalletAddress = window.localStorage.getItem("userWalletAddress");
     const amount = document.getElementById("amountInput").value;
     const address = document.getElementById("addressInput").value;
-    await window.contract.methods.withdraw(address, amount).send({from: account});
+    await window.contract.methods.withdraw(address, amount).send({from: userWalletAddress});
+}
+
+function setValue() {
+    document.getElementById("depositInput").value = "500";
+}
+
+function setValue1() {
+    document.getElementById("depositInput").value = "1000";
+}
+
+function setValue2() {
+    document.getElementById("depositInput").value = "1500";
 }
 
 window.onload = function() {
