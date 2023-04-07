@@ -13,6 +13,7 @@ const port = process.env.PORT || 6969;
 app.locals.title = 'SmartWealth Solutions';
 app.locals.description = 'Empowering Your Future, One Investment at a Time';
 app.locals.email = 'contact@SmartWealthSolutions.com';
+app.locals.currency = 'wei';
 
 app.use(session({
 	secret: 'marthandam damdererere',
@@ -26,7 +27,7 @@ app.set('views', './src/views')
 app.get('/', (request, response) => {
     response.render('index', {});
   });
-app.get('/login', (request, response) => {
+app.get('/products', (request, response) => {
     response.render('login', {});
   });
 
