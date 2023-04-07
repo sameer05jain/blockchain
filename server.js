@@ -26,7 +26,7 @@ app.set('views', './src/views')
 app.get('/', (request, response) => {
     response.render('index', {});
   });
-app.get('/login', (request, response) => {
+app.get('/products', (request, response) => {
     response.render('login', {});
   });
 

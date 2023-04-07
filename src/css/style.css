@@ -199,6 +199,6 @@ height: 100%;
     display: none;
   }
 
-  .dashboard-container{
+  .service, .dashboard-container, .savings, .transaction{
     display: none;
   }

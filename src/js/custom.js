@@ -1,4 +1,3 @@
-let account;
 // Login 
 const loginWithWeb3 = async () => {
     // 1.1 check if there is global window.web3 instance
@@ -22,20 +21,17 @@ const loginWithWeb3 = async () => {
         window.localStorage.setItem("userWalletAddress", selectedAccount);
 
         // 5. Hide the login section
-        document.getElementsByClassName("logout")[0].style.display = "inline"; 
-        document.getElementsByClassName("login")[0].style.display = "none"; 
-        document.getElementsByClassName("dashboard-container")[0].style.display = "block"; 
-
         $(".login-container").fadeOut("slow");
-        $(".dashboard-container").fadeIn("slow");
-
-        // 6. Show Dashbpoard Display Contract
-
-        showUserDashboard();
+        $(".service").fadeIn("slow");
+        $(".dashboard-containe").fadeIn("slow");
+        $(".savings").fadeIn("slow");
+        $(".transaction").fadeIn("slow");
 
         await connectContract();
         getContractAccount();
         getContractBalance();
+
+        setSessionButtons()
       } catch (error) {
         alert(error);
       }
@@ -46,14 +42,17 @@ const loginWithWeb3 = async () => {
 
 const setSessionButtons = async () => {
     if(window.localStorage.getItem("userWalletAddress")) {
-        document.getElementsByClassName("login")[0].style.display = "none"; 
-        document.getElementsByClassName("logout")[0].style.display = "inline"; 
-        document.getElementsByClassName("login-container")[0].style.display = "none"; 
-        document.getElementsByClassName("dashboard-container")[0].style.display = "block"; 
         showUserDashboard();
         await connectContract();
         getContractAccount();
         getContractBalance();
+
+        document.getElementsByClassName("logout")[0].style.display = "inline"; 
+        document.getElementsByClassName("login-container")[0].style.display = "none"; 
+        document.getElementsByClassName("dashboard-container")[0].style.display = "block"; 
+        document.getElementsByClassName("service")[0].style.display = "block"; 
+        document.getElementsByClassName("savings")[0].style.display = "block"; 
+        document.getElementsByClassName("transaction")[0].style.display = "block"; 
     } 
 }
 
