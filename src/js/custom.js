@@ -128,7 +128,7 @@ const getContractAccount = async () => {
 
 const getContractBalance = async () => { 
     const data = await window.contract.methods.getBalance().call();
-    document.getElementById("balanceArea").innerHTML = `Contract Balance: ${data}`;
+    document.getElementById("balanceArea").innerHTML = `Contract Balance: ${data} wei`;
 }
 
 const depositContract = async () => {

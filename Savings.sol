@@ -25,13 +25,9 @@ contract SavingsPlatform {
         return (balances[user] * interestRate) / 100;
     }
 
-    function withdraw() public {
-        uint256 amount = balances[msg.sender] + calculateInterest(msg.sender);
-        require(amount > 0, "No balance to withdraw");
-        balances[msg.sender] = 0;
-        totalDeposits -= amount;
-        payable(msg.sender).transfer(amount);
-        emit Withdrawal(msg.sender, amount);
+    function withdraw(address payable _to, uint256 _amount) external {
+        require(address(this).balance >= _amount, "Insufficient contract balance");
+        _to.transfer(_amount);
     }
 
     function getBalance(address user) public view returns (uint256) {
