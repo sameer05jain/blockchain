@@ -1,6 +1,13 @@
 {
-	"contractAddress": "0x6db46Fb02101392A9ce001ebEF678779F32214bE",
+	"contractAddress": "0x785143cd83A22B527bFdfAA95F4289E72CEB9A41",
 	"contractABI": [
+		{
+			"inputs": [],
+			"name": "deposit",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
 		{
 			"inputs": [
 				{
@@ -30,6 +37,24 @@
 			],
 			"name": "Deposit",
 			"type": "event"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address payable",
+					"name": "_to",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_amount",
+					"type": "uint256"
+				}
+			],
+			"name": "withdraw",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
 			"anonymous": false,
@@ -67,13 +92,6 @@
 				}
 			],
 			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"name": "deposit",
-			"outputs": [],
-			"stateMutability": "payable",
 			"type": "function"
 		},
 		{
@@ -119,24 +137,6 @@
 				}
 			],
 			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address payable",
-					"name": "_to",
-					"type": "address"
-				},
-				{
-					"internalType": "uint256",
-					"name": "_amount",
-					"type": "uint256"
-				}
-			],
-			"name": "withdraw",
-			"outputs": [],
-			"stateMutability": "nonpayable",
 			"type": "function"
 		}
 	]
