@@ -26,8 +26,14 @@ contract SavingsPlatform {
     }
 
     function withdraw(address payable _to, uint256 _amount) external {
+        require(balances[msg.sender] >= _amount, "Insufficient user balance");
         require(address(this).balance >= _amount, "Insufficient contract balance");
+
+        balances[msg.sender] -= _amount;
+        totalDeposits -= _amount;
         _to.transfer(_amount);
+
+        emit Withdrawal(msg.sender, _amount);
     }
 
     function getBalance(address user) public view returns (uint256) {
